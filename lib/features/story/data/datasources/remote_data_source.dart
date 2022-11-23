@@ -17,8 +17,7 @@ class RemoteDataSourceImpl implements RemoteDataSource {
         final stories = await firestore.collection("Users")
             .doc(userId)
             .collection("userStories")
-            .get().then((value) => value.docs.map((e) => StoryModel.fromJson(e.data())).toList());
+            .get().then((QuerySnapshot querySnapshot) => querySnapshot.docs.map((e) => StoryModel.fromDoc(e)).toList());
         return stories;
-
   }
 }

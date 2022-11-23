@@ -1,4 +1,8 @@
+import 'package:diary_app_final/features/authentication/presentation/bloc/bloc_auth/bloc_auth_bloc.dart';
+import 'package:diary_app_final/features/authentication/presentation/bloc/bloc_auth/bloc_auth_state.dart';
+import 'package:diary_app_final/features/authentication/presentation/widgets/sign_up_forms.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatelessWidget {
   @override
@@ -7,36 +11,19 @@ class SignUpPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Создайте аккаунт"),
       ),
-      body: widget(),
-    );
-  }
-
-  Widget widget() {
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
-    final TextEditingController _passwordCheckController = TextEditingController();
-    return Column(
-      children: [
-        TextField(
-          controller: _nameController,
-        ),
-        TextField(
-          controller: _emailController,
-        ),
-        TextField(
-          controller: _passwordController,
-        ),
-        TextField(
-          controller: _passwordCheckController,
-        ),
-        ElevatedButton(
-          onPressed: () {
-
-          },
-          child: Text("Регаться"),
-        )
-      ],
+      body: BlocBuilder<BlocAuthBloc, BlocAuthState>(
+          builder: (context, state) {
+            if (state is BlocAuthInitState) {
+              return SignUpForm();
+            } else if (state is BlocAuthErrorState) {
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 5),));
+              print('${state.message}');
+              return SignUpForm();
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          }
+      ),
     );
   }
 }

@@ -1,7 +1,8 @@
 class StoryEntity {
+  String? docId;
   String title;
   String text;
   dynamic date;
 
-  StoryEntity({required this.title, required this.text, required this.date});
+  StoryEntity({this.docId, required this.title, required this.text, required this.date});
 }

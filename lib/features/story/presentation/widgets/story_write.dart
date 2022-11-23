@@ -1,5 +1,6 @@
 import 'package:diary_app_final/features/story/presentation/bloc/bloc_add_story/add_story_bloc.dart';
 import 'package:diary_app_final/features/story/presentation/bloc/bloc_add_story/add_story_event.dart';
+import 'package:diary_app_final/features/story/presentation/bloc/cubit_story_list/stories_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/entities/story_entity.dart';
@@ -26,7 +27,7 @@ class StoryWrite extends StatelessWidget {
                     onPressed:() {
                       final StoryEntity story = StoryEntity(title: _titleController.text, text: "text", date: null);
                       _bloc.add(AddStoryAdding(story));
-                      Navigator.push;
+                      Navigator.pop(context);
                     },
                     child: Text("Сохранить"),
                   );

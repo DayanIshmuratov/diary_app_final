@@ -17,13 +17,6 @@ import 'locator_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then((value) => print(value.options.projectId));
-  // await FirebaseAuth.instance.authStateChanges().listen((User? user) {
-  //   if (user == null) {
-  //     return print('Is not signed');
-  //   } else {
-  //     return print('Signed');
-  //   }
-  // });
   await di.init();
   runApp(MyApp());
 }
@@ -33,14 +26,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<AddStoryBloc>(
+            create: (context) => sl<AddStoryBloc>()),
         BlocProvider(
             create:(context) => sl<BlocAuthBloc>()),
         BlocProvider<AuthCubit>(
             create: (context) => AuthCubit()..launch()),
-        BlocProvider<StoriesListCubit>(
-            create: (context) => sl<StoriesListCubit>()),
-        BlocProvider<AddStoryBloc>(
-            create: (context) => sl<AddStoryBloc>()),
       ],
       child: MaterialApp(
         onGenerateRoute: (settings) {
@@ -53,7 +44,7 @@ class MyApp extends StatelessWidget {
         },
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.teal,
+          primarySwatch: Colors.green,
         ),
         home: BlocBuilder<AuthCubit, AuthState>(
           builder: (context, state) {

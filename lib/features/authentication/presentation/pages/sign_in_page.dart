@@ -1,7 +1,7 @@
 import 'package:diary_app_final/features/authentication/presentation/bloc/bloc_auth/bloc_auth_event.dart';
 import 'package:diary_app_final/features/authentication/presentation/bloc/bloc_auth/bloc_auth_state.dart';
 import 'package:diary_app_final/features/authentication/presentation/bloc/cubit_auth/auth_cubit.dart';
-import 'package:diary_app_final/features/authentication/presentation/bloc/widgets/sign_in_forms.dart';
+import 'package:diary_app_final/features/authentication/presentation/widgets/sign_in_forms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -25,7 +25,9 @@ class _SignInPageState extends State<SignInPage> {
             if (state is BlocAuthInitState) {
               return SignInTextForm();
             } else if (state is BlocAuthErrorState) {
-              return ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 5),));
+              print('${state.message}');
+              return SignInTextForm();
             } else {
               return const Center(child: CircularProgressIndicator());
             }

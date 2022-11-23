@@ -4,7 +4,7 @@ import 'package:diary_app_final/features/story/domain/repositories/repository.da
 class AddStory {
   final StoryRepository storyRepository;
   AddStory({required this.storyRepository});
-  void call(String userId, StoryEntity story) {
-    return storyRepository.addStory(userId, story);
+  void call(String userId, StoryEntity story, int counter) {
+    return storyRepository.addStory(userId, story, counter);
   }
 }

@@ -23,10 +23,10 @@ class StoryRepositoryImpl implements StoryRepository {
     return await _getStory(() => remoteDataSource.getAllStories(userId));
   }
 
-  void addStory(String userId, StoryEntity story) async {
+  void addStory(String userId, StoryEntity story, int counter) async {
     if (await networkInfo.isConnected) {
       try {
-        remoteDataDestinationSave.addStory(userId, story);
+        remoteDataDestinationSave.addStory(userId, story, counter);
       } on ServerException {
         throw ServerFailure();
       }
