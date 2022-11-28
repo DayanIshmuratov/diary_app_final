@@ -1,7 +1,7 @@
 import 'package:diary_app_final/common/app_colors.dart';
 import 'package:diary_app_final/features/authentication/presentation/bloc/bloc_auth/bloc_auth_bloc.dart';
 import 'package:diary_app_final/features/authentication/presentation/bloc/bloc_auth/bloc_auth_event.dart';
-import 'package:diary_app_final/features/story/presentation/bloc/bloc_add_story/add_story_bloc.dart';
+import 'package:diary_app_final/features/story/presentation/bloc/bloc_story/story_bloc.dart';
 import 'package:diary_app_final/features/story/presentation/bloc/cubit_story_list/stories_list_cubit.dart';
 import 'package:diary_app_final/locator_service.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
             floatingActionButton: FloatingActionButton(
               child: Icon(Icons.add),
               onPressed: () async {
-                  await Navigator.pushNamed(context, "/story_page");
+                  await Navigator.pushNamed(context, "/story_write_page");
                   setState(() {});
               },
             ),

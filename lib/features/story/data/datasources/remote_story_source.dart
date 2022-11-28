@@ -5,13 +5,13 @@ import 'package:diary_app_final/core/error/exception.dart';
 
 import '../models/story_model.dart';
 
-abstract class RemoteDataSource{
+abstract class RemoteStorySource{
   Future<List<StoryModel>> getAllStories(String userId);
 }
 
-class RemoteDataSourceImpl implements RemoteDataSource {
+class RemoteStorySourceImpl implements RemoteStorySource {
   FirebaseFirestore firestore;
-  RemoteDataSourceImpl({required this.firestore});
+  RemoteStorySourceImpl({required this.firestore});
   @override
   Future<List<StoryModel>> getAllStories(String userId) async {
         final stories = await firestore.collection("Users")

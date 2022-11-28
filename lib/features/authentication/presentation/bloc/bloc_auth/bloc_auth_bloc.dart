@@ -17,7 +17,10 @@ class BlocAuthBloc extends Bloc<BlocAuthEvent, BlocAuthState> {
         final result = await signIn.signIn(event.email, event.password);
         result.fold((failure) => emit(BlocAuthErrorState(ErrorMessages.ServerFailureMessage)),
                 (firebaseException) => firebaseException.fold(
-                        (l) => emit(BlocAuthErrorState(_signInErrorTranslator(l.code))),
+                        (l) {
+                          print(l.code);
+                          emit(BlocAuthErrorState(_signInErrorTranslator(l.code)));
+                        },
                         (r) => null));
         emit(BlocAuthInitState());
       }
@@ -30,7 +33,10 @@ class BlocAuthBloc extends Bloc<BlocAuthEvent, BlocAuthState> {
       final result = await signUp.signUp(event.name, event.email, event.password);
       result.fold((failure) => emit(BlocAuthErrorState(ErrorMessages.ServerFailureMessage)),
               (firebaseException) => firebaseException.fold(
-                  (l) => emit(BlocAuthErrorState(_signUpErrorTranslator(l.code))),
+                  (l) {
+                    print(l.code);
+                    emit(BlocAuthErrorState(_signUpErrorTranslator(l.code)));
+                  },
                   (r) => null));
       emit(BlocAuthInitState());
       }

@@ -4,9 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit() : super(LaunchingAuthState());
+  final FirebaseAuth firebaseAuth;
+  AuthCubit({required this.firebaseAuth}) : super(LaunchingAuthState());
   launch() {
-    FirebaseAuth.instance
+    firebaseAuth
         .authStateChanges()
         .listen((User? user) {
       if (user == null) {

@@ -38,33 +38,38 @@ class _StoryListState extends State<StoryList> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        Container(
-
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                border:
-                                    Border.all(width: 4, color: Colors.green)),
-                            height: 70,
-                            child: Column(
-                              children: [
-                                Align(
-                                    child: Text(
-                                      state.stories[index].title,
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w400,
+                        GestureDetector(
+                          onTap: () async {
+                           await Navigator.pushNamed(context, '/story_read_page', arguments: state.stories[index]);
+                           setState(() {});
+                          },
+                          child: Container(
+                              padding: EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  border:
+                                      Border.all(width: 4, color: Colors.green)),
+                              height: 70,
+                              child: Column(
+                                children: [
+                                  Align(
+                                      child: Text(
+                                        state.stories[index].title,
+                                        style: TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    alignment: Alignment.centerLeft),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Text(state.stories[index].text),
-                                )
-                              ],
-                            ),
+                                      alignment: Alignment.centerLeft),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(state.stories[index].text),
+                                  )
+                                ],
+                              ),
+                          ),
                         ),
                         SizedBox(height: 8,)
                       ],

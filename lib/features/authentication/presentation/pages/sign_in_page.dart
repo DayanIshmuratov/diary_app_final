@@ -20,18 +20,22 @@ class _SignInPageState extends State<SignInPage> {
       appBar: AppBar(
         title: const Text("Войдите в свой аккаунт"),
       ),
-      body: BlocBuilder<BlocAuthBloc, BlocAuthState>(
-          builder: (context, state) {
-            if (state is BlocAuthInitState) {
-              return SignInTextForm();
-            } else if (state is BlocAuthErrorState) {
-              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 5),));
-              print('${state.message}');
-              return SignInTextForm();
-            } else {
-              return const Center(child: CircularProgressIndicator());
-            }
+      body: BlocListener<BlocAuthBloc, BlocAuthState>(
+        listener: (context, state) {
+          if (state is BlocAuthErrorState) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.message), duration: Duration(seconds: 5),));
           }
+        },
+        child: BlocBuilder<BlocAuthBloc, BlocAuthState>(
+            builder: (context, state) {
+              if (state is BlocAuthInitState) {
+                return SignInTextForm();
+              }  else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            }
+        ),
       ),
     );
   }
